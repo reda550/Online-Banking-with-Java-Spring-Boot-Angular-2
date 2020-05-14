@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.userFront.Utility.Enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.userFront.dao.RoleDao;
+import com.userFront.Repository.RoleDao;
 import com.userFront.domain.PrimaryAccount;
 import com.userFront.domain.SavingsAccount;
 import com.userFront.domain.User;
@@ -48,26 +49,29 @@ public class HomeController {
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signupPost(@ModelAttribute("user") User user, Model model) {
+     try {
+		 if (userService.checkUserExists(user.getUsername(), user.getEmail())) {
 
-		if (userService.checkUserExists(user.getUsername(), user.getEmail())) {
+			 if (userService.checkEmailExists(user.getEmail())) {
+				 model.addAttribute("emailExists", true);
+			 }
 
-			if (userService.checkEmailExists(user.getEmail())) {
-				model.addAttribute("emailExists", true);
-			}
+			 if (userService.checkUsernameExists(user.getUsername())) {
+				 model.addAttribute("usernameExists", true);
+			 }
 
-			if (userService.checkUsernameExists(user.getUsername())) {
-				model.addAttribute("usernameExists", true);
-			}
+			 return "signup";
+		 } else {
+			 Set<UserRole> userRoles = new HashSet<>();
+			 userRoles.add(new UserRole(user, roleDao.findByName(RoleEnum.ADMIN)));
 
-			return "signup";
-		} else {
-			Set<UserRole> userRoles = new HashSet<>();
-			userRoles.add(new UserRole(user, roleDao.findByName("ROLE_USER")));
+			 userService.createUser(user, userRoles);
 
-			userService.createUser(user, userRoles);
-
-			return "redirect:/";
-		}
+			 return "redirect:/";
+		 }
+	 }catch (Exception e){
+     	throw e;
+	 }
 	}
 
 	@RequestMapping("/userFront")

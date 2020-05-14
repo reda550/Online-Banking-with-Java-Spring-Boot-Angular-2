@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.userFront.dao.PrimaryAccountDao;
-import com.userFront.dao.PrimaryTransactionDao;
-import com.userFront.dao.RecipientDao;
-import com.userFront.dao.SavingsAccountDao;
-import com.userFront.dao.SavingsTransactionDao;
+import com.userFront.Repository.PrimaryAccountDao;
+import com.userFront.Repository.PrimaryTransactionDao;
+import com.userFront.Repository.RecipientDao;
+import com.userFront.Repository.SavingsAccountDao;
+import com.userFront.Repository.SavingsTransactionDao;
 import com.userFront.domain.PrimaryAccount;
 import com.userFront.domain.PrimaryTransaction;
 import com.userFront.domain.Recipient;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.userFront.domain.Appointment;
 import com.userFront.service.AppointmentService;
-import com.userFront.dao.AppointmentDao;
+import com.userFront.Repository.AppointmentDao;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {

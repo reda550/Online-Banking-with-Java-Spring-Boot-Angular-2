@@ -1,4 +1,4 @@
-package com.userFront.dao;
+package com.userFront.Repository;
 
 import java.util.List;
 

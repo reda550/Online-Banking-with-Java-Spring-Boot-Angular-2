@@ -7,8 +7,8 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.userFront.dao.PrimaryAccountDao;
-import com.userFront.dao.SavingsAccountDao;
+import com.userFront.Repository.PrimaryAccountDao;
+import com.userFront.Repository.SavingsAccountDao;
 import com.userFront.domain.PrimaryAccount;
 import com.userFront.domain.PrimaryTransaction;
 import com.userFront.domain.SavingsAccount;

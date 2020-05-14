@@ -4,11 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.userFront.domain.PrimaryTransaction;
 import com.userFront.domain.SavingsTransaction;
@@ -18,7 +14,6 @@ import com.userFront.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-@PreAuthorize("hasRole('ADMIN')")
 public class UserResource {
 
     @Autowired
@@ -27,7 +22,7 @@ public class UserResource {
     @Autowired
     private TransactionService transactionService;
 
-    @RequestMapping(value = "/user/all", method = RequestMethod.GET)
+    @GetMapping(value = "/user/all")
     public List<User> userList() {
         return userService.findUserList();
     }

@@ -20,7 +20,7 @@
                             <h2>Primary Balance: </h2>
                         </div>
                         <div class="col-xs-6 text-right">
-                            <h1><i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${primaryAccount.accountBalance}">...</span></h1>
+                            <h1><i class="fa" aria-hidden="true">DHS</i> <span th:text="${primaryAccount.accountBalance}">...</span></h1>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                             <h2>Savings Balance: </h2>
                         </div>
                         <div class="col-xs-6 text-right">
-                            <h1><i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${savingsAccount.accountBalance}">...</span></h1>
+                            <h1><i class="fa" aria-hidden="true">DHS</i> <span th:text="${savingsAccount.accountBalance}">...</span></h1>
                         </div>
                     </div>
                 </div>
@@ -61,13 +61,13 @@
                             <i class="fa fa-credit-card fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div>Deposit</div>
+                            <div>Verser</div>
                         </div>
                     </div>
                 </div>
                 <a th:href="@{/account/deposit}">
                     <div class="panel-footer">
-                        <span class="pull-left">Go to Deposit</span>
+                        <span class="pull-left">versement</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
@@ -82,13 +82,13 @@
                             <i class="fa fa-money fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div>Withdraw</div>
+                            <div>retrait</div>
                         </div>
                     </div>
                 </div>
                 <a th:href="@{/account/withdraw}">
                     <div class="panel-footer">
-                        <span class="pull-left">Go to Withdrawal</span>
+                        <span class="pull-left">retirer</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>

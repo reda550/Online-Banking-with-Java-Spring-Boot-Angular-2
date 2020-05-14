@@ -15,18 +15,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let user of userList">
-			<td>{{user.username}}</td>
-			<td>{{user.firstName}}</td>
-			<td>{{user.lastName}}</td>
-			<td>{{user.email}}</td>
-			<td>{{user.phone}}</td>
-			<td><a (click)="onSelectPrimary(user.username)" style="cursor: pointer;">{{user.primaryAccount.accountBalance}}</a></td>
-			<td><a (click)="onSelectSavings(user.username)" style="cursor: pointer;">{{user.savingsAccount.accountBalance}}</a></td>
-			<td>{{user.enabled}}</td>
-			<td [hidden]="user.enabled"><a (click)="enableUser(user.username)" style="cursor: pointer;">Enable</a></td>
-			<td [hidden]="!user.enabled"><a (click)="disableUser(user.username)" style="cursor: pointer;">Disable</a></td>
-		</tr>
+
 	</tbody>
-</table>   
+</table>
 

@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.userFront.dao.UserDao;
+import com.userFront.Repository.UserDao;
 import com.userFront.domain.User;
 
 @Service

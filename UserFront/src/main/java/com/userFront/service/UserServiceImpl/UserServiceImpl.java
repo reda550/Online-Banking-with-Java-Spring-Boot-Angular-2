@@ -10,8 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.userFront.dao.RoleDao;
-import com.userFront.dao.UserDao;
+import com.userFront.Repository.RoleDao;
+import com.userFront.Repository.UserDao;
 import com.userFront.domain.User;
 import com.userFront.domain.security.UserRole;
 import com.userFront.service.AccountService;
@@ -55,11 +55,11 @@ public class UserServiceImpl implements UserService {
 		} else {
 			String encryptedPassword = passwordEncoder.encode(user.getPassword());
 			user.setPassword(encryptedPassword);
-
+          
 			for (UserRole ur : userRoles) {
 				roleDao.save(ur.getRole());
 			}
-
+         
 			user.getUserRoles().addAll(userRoles);
 
 			user.setPrimaryAccount(accountService.createPrimaryAccount());
