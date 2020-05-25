@@ -12,50 +12,31 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.userFront.domain.Settings.AbstractAuditableEntity;
+import lombok.*;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class PrimaryAccount {
+public class PrimaryAccount extends AbstractAuditableEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private int accountNumber;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long accountNumber;
 	private BigDecimal accountBalance;
 
 	@OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<PrimaryTransaction> primaryTransactionList;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public int getAccountNumber() {
-		return accountNumber;
-	}
-
-	public void setAccountNumber(int accountNumber) {
+	public PrimaryAccount(Long accountNumber, BigDecimal accountBalance, List<PrimaryTransaction> primaryTransactionList) {
 		this.accountNumber = accountNumber;
-	}
-
-	public BigDecimal getAccountBalance() {
-		return accountBalance;
-	}
-
-	public void setAccountBalance(BigDecimal accountBalance) {
 		this.accountBalance = accountBalance;
-	}
-
-	public List<PrimaryTransaction> getPrimaryTransactionList() {
-		return primaryTransactionList;
-	}
-
-	public void setPrimaryTransactionList(List<PrimaryTransaction> primaryTransactionList) {
 		this.primaryTransactionList = primaryTransactionList;
 	}
-
 }

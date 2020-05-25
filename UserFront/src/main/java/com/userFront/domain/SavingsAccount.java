@@ -12,50 +12,32 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.userFront.domain.Settings.AbstractAuditableEntity;
+import lombok.*;
 
+
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class SavingsAccount {
+public class SavingsAccount extends AbstractAuditableEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private int accountNumber;
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private BigDecimal accountBalance;
 
 	@OneToMany(mappedBy = "savingsAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<SavingsTransaction> savingsTransactionList;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public int getAccountNumber() {
-		return accountNumber;
-	}
-
-	public void setAccountNumber(int accountNumber) {
+	public SavingsAccount(int accountNumber, BigDecimal accountBalance, List<SavingsTransaction> savingsTransactionList) {
 		this.accountNumber = accountNumber;
-	}
-
-	public BigDecimal getAccountBalance() {
-		return accountBalance;
-	}
-
-	public void setAccountBalance(BigDecimal accountBalance) {
 		this.accountBalance = accountBalance;
-	}
-
-	public List<SavingsTransaction> getSavingsTransactionList() {
-		return savingsTransactionList;
-	}
-
-	public void setSavingsTransactionList(List<SavingsTransaction> savingsTransactionList) {
 		this.savingsTransactionList = savingsTransactionList;
 	}
-
 }

@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
 
 		if (localUser != null) {
 			LOG.info("User with username {} already exist. Nothing will be done. ", user.getUsername());
+			return null;
 		} else {
 			String encryptedPassword = passwordEncoder.encode(user.getPassword());
 			user.setPassword(encryptedPassword);
@@ -114,8 +115,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public List<User> findUserList() {
-        return userDao.findAll();
+        return userDao.findusers();
     }
+	public List<User> findAdminList() {
+
+		return userDao.findadmins();
+	}
 	
 	
 }

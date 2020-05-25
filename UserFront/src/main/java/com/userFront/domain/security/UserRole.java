@@ -1,13 +1,21 @@
 package com.userFront.domain.security;
 
+import com.userFront.domain.Settings.AbstractAuditableEntity;
 import com.userFront.domain.User;
+import lombok.*;
 
 import javax.persistence.*;
 
 
+
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="user_role")
-public class UserRole {
+public class UserRole extends AbstractAuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userRoleId;
@@ -23,35 +31,8 @@ public class UserRole {
     private User user;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;
-
-    public UserRole() {}
-
-    public long getUserRoleId() {
-        return userRoleId;
-    }
-
-    public void setUserRoleId(long userRoleId) {
-        this.userRoleId = userRoleId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
 
 }

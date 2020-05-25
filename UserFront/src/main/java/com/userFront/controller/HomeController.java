@@ -33,7 +33,7 @@ public class HomeController {
 		return "redirect:/index";
 	}
 
-	@RequestMapping("/index")
+	@RequestMapping(value = "/index" )
 	public String index() {
 		return "index";
 	}
@@ -63,7 +63,7 @@ public class HomeController {
 			 return "signup";
 		 } else {
 			 Set<UserRole> userRoles = new HashSet<>();
-			 userRoles.add(new UserRole(user, roleDao.findByName(RoleEnum.ADMIN)));
+			 userRoles.add(new UserRole(user, roleDao.findByName(RoleEnum.USER)));
 
 			 userService.createUser(user, userRoles);
 
@@ -79,7 +79,6 @@ public class HomeController {
 		User user = userService.findByUsername(principal.getName());
 		PrimaryAccount primaryAccount = user.getPrimaryAccount();
 		SavingsAccount savingsAccount = user.getSavingsAccount();
-
 		model.addAttribute("primaryAccount", primaryAccount);
 		model.addAttribute("savingsAccount", savingsAccount);
 

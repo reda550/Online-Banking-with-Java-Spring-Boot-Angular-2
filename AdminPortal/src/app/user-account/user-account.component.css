@@ -1,0 +1,22 @@
+
+  ::ng-deep ng2-smart-table table tr.ng2-smart-titles th a{
+    font-weight : bold;
+    font-size: small;
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  ::ng-deep ng2-smart-table table tbody tr:nth-child(even) {
+    background: #E6EFEE !important;
+}
+  :host /deep/ ng2-smart-table { font-size: medium; }
+
+
+  ::ng-deep ng2-smart-table table tr.ng2-smart-titles th {
+    background-color: #52766F;
+
+}
+  ::ng-deep ng2-smart-table table tr td{
+    font-size: 20px ;
+    font-family:Calibri;
+  }
+

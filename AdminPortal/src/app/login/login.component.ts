@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable}  from 'rxjs/Observable';
-import {LoginService} from '../login.service';
+import {LoginService} from '../Services/login.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,26 +14,25 @@ export class LoginComponent implements OnInit {
   loggedIn: boolean;
   username: string;
   password: string;
+  invalidLogin: boolean;
 
-	constructor (private loginService: LoginService) {
-    if(localStorage.getItem('PortalAdminHasLoggedIn') == '' || localStorage.getItem('PortalAdminHasLoggedIn') == null) {
-      this.loggedIn = false;
-    } else {
-      this.loggedIn = true;
-    }
+	constructor (private loginservice: LoginService, private router: Router ,private toastr: ToastrService) {
+
   }
-  
+
   onSubmit() {
-  	this.loginService.sendCredential(this.username, this.password).subscribe(
-      res => {
-        this.loggedIn=true;
-        localStorage.setItem('PortalAdminHasLoggedIn', 'true');
-        location.reload();
-      },
-      err => console.log(err)
-    );
+      if (this.loginservice.authenticate(this.username, this.password)) {
+       // this.invalidLogin = false
+        this.router.navigate(['home']);
+        this
+      } else
+        this.toastr.error('Username or Password Incorrect', 'Login Failed');
+        //this.invalidLogin = true
+
+
   }
 
   ngOnInit() {}
+
 
 }

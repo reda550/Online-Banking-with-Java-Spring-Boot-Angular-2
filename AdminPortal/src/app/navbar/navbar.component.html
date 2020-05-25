@@ -1,4 +1,4 @@
-<nav class="navbar navbar-clean">
+<nav class="navbar navbar-clean" >
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -8,17 +8,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" routerLink="/login" routerLinkActive="active">Admin Portal</a>
+       <a class="navbar-brand" (click) = "show()">Administration</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li [style.display]="getDisplay()"><a routerLink="/userAccount" routerLinkActive="active"> User Account <span class="sr-only">(current)</span></a></li>
-        <li [style.display]="getDisplay()"><a routerLink="/appointment" routerLinkActive="active"> Appointment <span class="sr-only">(current)</span></a></li>
+        <li *ngIf="loginService.isUserLoggedIn()"><a routerLink="/userAccount" routerLinkActive="active"> Liste des Clients </a></li>
+        <li *ngIf="loginService.isUserLoggedIn()"><a routerLink="/appointment" routerLinkActive="active"> Liste des rendez vous </a></li>
+        <li *ngIf="loginService.isUserLoggedIn()"><a routerLink="/admins" routerLinkActive="active"> Liste des Admins</a></li>
+        <li *ngIf="loginService.isUserLoggedIn()"><a routerLink="/addAdmin" routerLinkActive="active"> Ajouter Admin </a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li [style.display]="getDisplay()"><a (click)="logout()" style="cursor: pointer;">Logout</a></li>
+        <li *ngIf="loginService.isUserLoggedIn()"><a (click)="logout()" style="cursor: pointer;">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

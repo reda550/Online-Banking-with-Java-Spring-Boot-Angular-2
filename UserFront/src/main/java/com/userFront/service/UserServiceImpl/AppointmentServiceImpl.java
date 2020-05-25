@@ -29,7 +29,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     public void confirmAppointment(Long id) {
         Appointment appointment = findAppointment(id);
-        appointment.setConfirmed(true);
+        appointment.setConfirmed(!appointment.isConfirmed());
         appointmentDao.save(appointment);
     }
 }

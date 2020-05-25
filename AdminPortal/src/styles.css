@@ -3,7 +3,7 @@
 @import url('http://fonts.googleapis.com/css?family=Raleway:400,200');
 @import url('http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
 
-  
+
 html {
   background: #ffffff;
   width: 100%;
@@ -14,7 +14,7 @@ html {
 }
 
 .clean-font {
-  color: #8f8f8f; 
+  color: #8f8f8f;
   font-weight: 200;
 }
 
@@ -168,7 +168,7 @@ li .dropdown-menu:before {
   padding: 15px 35px 45px;
   margin: 0 auto;
   background-color: #fff;
-  border: 1px solid rgba(0,0,0,0.1);  
+  border: 1px solid rgba(0,0,0,0.1);
   }
 
 @media (min-width: 768px) {
@@ -192,3 +192,6 @@ li .dropdown-menu:before {
   position: relative;
   float: left;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

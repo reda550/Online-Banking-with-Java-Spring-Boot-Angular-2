@@ -9,7 +9,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-@Data
+
 @Getter
 @Setter
 @MappedSuperclass

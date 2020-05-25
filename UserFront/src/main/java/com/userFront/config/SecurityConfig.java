@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.savedrequest.NullRequestCache;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.userFront.service.UserServiceImpl.UserSecurityService;
@@ -27,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserSecurityService userSecurityService;
+
 
     private static final String SALT = "salt"; // Salt should be protected carefully
 
@@ -45,31 +48,47 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/contact/**",
             "/error/**/*",
             "/console/**",
-            "/signup"
+            "/signup",
+            "/api/**"
     };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests().
-//                antMatchers("/**").
-                antMatchers(PUBLIC_MATCHERS).
-                permitAll().anyRequest().authenticated();
+       http.csrf().disable().cors().disable().formLogin().successForwardUrl("/userFront")
+               .failureForwardUrl("/index?error").loginPage("/index")
 
-        http
-                .csrf().disable().cors().disable()
-                .formLogin().failureUrl("/index?error").defaultSuccessUrl("/userFront").loginPage("/index").permitAll()
-                .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/index?logout").deleteCookies("remember-me").permitAll()
-                .and()
-                .rememberMe();
+               .and()
+                .authorizeRequests().
+                //antMatchers("/**").
+                antMatchers(PUBLIC_MATCHERS).
+                permitAll()
+               .antMatchers(HttpMethod.OPTIONS, "/**")
+                .permitAll()
+               .antMatchers("/**")
+               .permitAll().
+                 anyRequest()
+               .authenticated();
+
+
+/*
+        httpSecurity.csrf().disable()
+                // dont authenticate this particular request
+                .authorizeRequests().antMatchers(FrontAPI.USER.AUTHENTICATE,FrontAPI.WEBSOCKET_SERVER_RECEIVER,FrontAPI.SOCKET).permitAll().antMatchers(HttpMethod.OPTIONS, "/**")
+                .permitAll()
+                .antMatchers("/stomp").permitAll().
+                // all other requests need to be authenticated
+                        anyRequest().authenticated().and()
+                // make sure we use stateless session; session won't be used to
+                // store user's state.
+                .requestCache().requestCache(new NullRequestCache()).and()*/
     }
 
 
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//    	 auth.inMemoryAuthentication().withUser("user").password("password").roles("USER"); //This is in-memory authentication
+ 	   auth.inMemoryAuthentication().withUser("admin").password("123456").roles("Admin");
+        auth.inMemoryAuthentication().withUser("hassan").password("123456").roles("USER");//This is in-memory authentication
         auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
     }
 
